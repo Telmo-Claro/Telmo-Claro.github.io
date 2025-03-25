@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>About</title>
+
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#333333">
+    <meta name="description" content="Personal portfolio website showcasing projects, skills, and experience">
+    <link rel="manifest" href="https://yourusername.github.io/manifest.json">
+    <link rel="apple-touch-icon" href="https://yourusername.github.io/images/icon-192x192.png">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://yourusername.github.io/theme/css/style.css">
+    <link rel="stylesheet" href="https://yourusername.github.io/css/custom.css">
+<style>
+    .about-section {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+
+    .about-content {
+        line-height: 1.6;
+    }
+
+    .about-content h1 {
+        font-size: 2.5em;
+        margin-bottom: 30px;
+        color: var(--primary-color);
+    }
+
+    .about-content h2 {
+        font-size: 1.8em;
+        margin: 25px 0 15px;
+        color: var(--secondary-color);
+    }
+
+    .about-content p {
+        margin-bottom: 20px;
+    }
+
+    .about-content ul {
+        list-style-type: disc;
+        margin-left: 20px;
+        margin-bottom: 20px;
+    }
+
+    .about-content li {
+        margin-bottom: 10px;
+    }
+
+    @media (max-width: 768px) {
+        .about-section {
+            padding: 20px;
+        }
+
+        .about-content h1 {
+            font-size: 2em;
+        }
+
+        .about-content h2 {
+            font-size: 1.5em;
+        }
+    }
+</style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="nav-container">
+                <a href="https://yourusername.github.io/" class="logo">Telmo Claro Portfolio</a>
+                <button class="menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="https://yourusername.github.io/">Home</a></li>
+                    <li><a href="https://yourusername.github.io/projects">Projects</a></li>
+                    <li><a href="https://yourusername.github.io/about">About</a></li>
+                    <li><a href="https://yourusername.github.io/contact">Contact</a></li>
+                    <li><a href="https://yourusername.github.io/tictactoe">Tic Tac Toe</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+<section class="about-section">
+    <div class="about-content">
+        <h1>About Me</h1>
+<p>I'm a passionate software developer with a focus on creating elegant and efficient solutions.</p>
+<p>With several years of experience in web development, I specialize in building scalable applications using modern technologies and best practices. My journey in software development began with a curiosity about how things work on the internet, which led me to pursue a career in web development.</p>
+<p>I believe in writing clean, maintainable code and staying up-to-date with the latest industry trends and technologies. When I'm not coding, you can find me contributing to open-source projects, writing technical articles, or exploring new technologies.</p>
+<h2>Experience</h2>
+<h3>Senior Developer</h3>
+<p><strong>Company:</strong> Tech Company
+<strong>Period:</strong> 2020 - Present
+- Led development of key features
+- Mentored junior developers
+- Implemented best practices</p>
+<h3>Full Stack Developer</h3>
+<p><strong>Company:</strong> Startup
+<strong>Period:</strong> 2018 - 2020
+- Developed full-stack applications
+- Optimized performance
+- Collaborated with design team </p>
+    </div>
+</section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy;  Telmo Claro Portfolio. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+                <a href="https://linkedin.com/in/yourusername" target="_blank">LinkedIn</a>
+                <a href="https://twitter.com/yourusername" target="_blank">Twitter</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://yourusername.github.io/js/main.js"></script>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator)
+        {
+            window.addEventListener('load', () =>
+            {
+                navigator.serviceWorker.register('/js/service-worker.js')
+                    .then(registration =>
+                    {
+                        console.log('ServiceWorker registration successful');
+                    })
+                    .catch(err =>
+                    {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+    </script>
+</body>
+
+</html>
