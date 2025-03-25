@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }}{% endblock %}
+
+{% block content %}
+<section class="about-section">
+    <div class="about-content">
+        {{ page.content }}
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .about-section {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+
+    .about-content {
+        line-height: 1.6;
+    }
+
+    .about-content h1 {
+        font-size: 2.5em;
+        margin-bottom: 30px;
+        color: var(--primary-color);
+    }
+
+    .about-content h2 {
+        font-size: 1.8em;
+        margin: 25px 0 15px;
+        color: var(--secondary-color);
+    }
+
+    .about-content p {
+        margin-bottom: 20px;
+    }
+
+    .about-content ul {
+        list-style-type: disc;
+        margin-left: 20px;
+        margin-bottom: 20px;
+    }
+
+    .about-content li {
+        margin-bottom: 10px;
+    }
+
+    @media (max-width: 768px) {
+        .about-section {
+            padding: 20px;
+        }
+
+        .about-content h1 {
+            font-size: 2em;
+        }
+
+        .about-content h2 {
+            font-size: 1.5em;
+        }
+    }
+</style>
+{% endblock %}

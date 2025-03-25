@@ -1,0 +1,21 @@
+{
+    "name": "Telmo Claro Portfolio",
+    "short_name": "Portfolio",
+    "description": "Personal portfolio website showcasing projects, skills, and experience",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#333333",
+    "icons": [
+        {
+            "src": "/images/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
