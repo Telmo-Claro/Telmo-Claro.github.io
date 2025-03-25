@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Telmo Claro Portfolio - Categories</title>
+
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#333333">
+    <meta name="description" content="Personal portfolio website showcasing projects, skills, and experience">
+    <link rel="manifest" href="https://telmo-claro.github.io/manifest.json">
+    <link rel="apple-touch-icon" href="https://telmo-claro.github.io/images/icon-192x192.png">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://telmo-claro.github.io/theme/css/style.css">
+    <link rel="stylesheet" href="https://telmo-claro.github.io/css/custom.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="nav-container">
+                <a href="https://telmo-claro.github.io/" class="logo">Telmo Claro Portfolio</a>
+                <button class="menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="https://telmo-claro.github.io/">Home</a></li>
+                    <li><a href="https://telmo-claro.github.io/projects">Projects</a></li>
+                    <li><a href="https://telmo-claro.github.io/about">About</a></li>
+                    <li><a href="https://telmo-claro.github.io/contact">Contact</a></li>
+                    <li><a href="https://telmo-claro.github.io/tictactoe">Tic Tac Toe</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+    <h2>Categories on Telmo Claro Portfolio</h2>
+    <ul>
+    </ul>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy;  Telmo Claro Portfolio. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+                <a href="https://linkedin.com/in/yourusername" target="_blank">LinkedIn</a>
+                <a href="https://twitter.com/yourusername" target="_blank">Twitter</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://telmo-claro.github.io/js/main.js"></script>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator)
+        {
+            window.addEventListener('load', () =>
+            {
+                navigator.serviceWorker.register('/js/service-worker.js')
+                    .then(registration =>
+                    {
+                        console.log('ServiceWorker registration successful');
+                    })
+                    .catch(err =>
+                    {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+    </script>
+</body>
+
+</html>
