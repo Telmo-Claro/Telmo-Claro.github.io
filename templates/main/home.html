@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home - Portfolio{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1>Welcome to My Portfolio</h1>
+    <p class="lead">I'm a passionate developer creating elegant solutions to complex problems.</p>
+    <div class="cta-buttons">
+        <a href="{% url 'projects' %}" class="btn btn-primary">View Projects</a>
+        <a href="{% url 'contact' %}" class="btn btn-secondary">Get in Touch</a>
+    </div>
+</section>
+
+<section class="featured-skills">
+    <h2>Skills & Expertise</h2>
+    <div class="skills-grid">
+        <div class="skill-category">
+            <h3>Frontend</h3>
+            <ul>
+                <li>HTML5 & CSS3</li>
+                <li>JavaScript</li>
+                <li>React</li>
+                <li>Vue.js</li>
+            </ul>
+        </div>
+        <div class="skill-category">
+            <h3>Backend</h3>
+            <ul>
+                <li>Python</li>
+                <li>Django</li>
+                <li>Node.js</li>
+                <li>SQL</li>
+            </ul>
+        </div>
+        <div class="skill-category">
+            <h3>Tools & Others</h3>
+            <ul>
+                <li>Git</li>
+                <li>Docker</li>
+                <li>AWS</li>
+                <li>CI/CD</li>
+            </ul>
+        </div>
+    </div>
+</section>
+{% endblock %}
