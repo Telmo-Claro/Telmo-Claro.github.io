@@ -1,85 +1,205 @@
-const CACHE_NAME = 'portfolio-v1';
-const urlsToCache = [
-    '/',
-    '/projects/',
-    '/about/',
-    '/contact/',
-    '/tictactoe/',
-    '/css/style.css',
-    '/css/custom.css',
-    '/js/main.js',
-    '/images/icon-192x192.png',
-    '/images/icon-512x512.png'
-];
+// Main JavaScript file for the portfolio website
 
-// Install service worker and cache resources
-self.addEventListener('install', event =>
+// Smooth scrolling for anchor links
+document.addEventListener('DOMContentLoaded', function ()
 {
-    event.waitUntil(
-        caches.open(CACHE_NAME)
-            .then(cache =>
-            {
-                console.log('Opened cache');
-                return cache.addAll(urlsToCache);
-            })
-    );
-});
-
-// Activate service worker and clean up old caches
-self.addEventListener('activate', event =>
-{
-    event.waitUntil(
-        caches.keys().then(cacheNames =>
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor =>
+    {
+        anchor.addEventListener('click', function (e)
         {
-            return Promise.all(
-                cacheNames.map(cacheName =>
-                {
-                    if (cacheName !== CACHE_NAME)
-                    {
-                        return caches.delete(cacheName);
-                    }
-                })
-            );
-        })
-    );
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target)
+            {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Add animation classes to elements when they come into view
+    const observer = new IntersectionObserver((entries) =>
+    {
+        entries.forEach(entry =>
+        {
+            if (entry.isIntersecting)
+            {
+                entry.target.classList.add('animate-fade-in');
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    // Observe elements with animation classes
+    document.querySelectorAll('.animate-fade-in').forEach(element =>
+    {
+        observer.observe(element);
+    });
+
+    // Mobile menu toggle
+    const menuButton = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (menuButton && navLinks)
+    {
+        menuButton.addEventListener('click', () =>
+        {
+            navLinks.classList.toggle('active');
+            menuButton.classList.toggle('active');
+        });
+    }
+
+    // Form validation
+    const contactForm = document.querySelector('.contact-form');
+    if (contactForm)
+    {
+        contactForm.addEventListener('submit', function (e)
+        {
+            e.preventDefault();
+
+            // Basic form validation
+            const name = this.querySelector('input[name="name"]').value;
+            const email = this.querySelector('input[name="email"]').value;
+            const message = this.querySelector('textarea[name="message"]').value;
+
+            if (!name || !email || !message)
+            {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            if (!isValidEmail(email))
+            {
+                alert('Please enter a valid email address');
+                return;
+            }
+
+            // Here you would typically send the form data to a server
+            // For now, we'll just show a success message
+            alert('Thank you for your message! I will get back to you soon.');
+            this.reset();
+        });
+    }
 });
 
-// Fetch resources from cache or network
-self.addEventListener('fetch', event =>
+// Email validation helper function
+function isValidEmail(email)
 {
-    event.respondWith(
-        caches.match(event.request)
-            .then(response =>
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+// Add active class to current navigation item
+document.addEventListener('DOMContentLoaded', function ()
+{
+    const currentPath = window.location.pathname;
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    navLinks.forEach(link =>
+    {
+        if (link.getAttribute('href') === currentPath)
+        {
+            link.classList.add('active');
+        }
+    });
+});
+
+// Tic Tac Toe game functionality
+if (document.querySelector('#game-container'))
+{
+    document.addEventListener('DOMContentLoaded', function ()
+    {
+        const board = document.getElementById('board');
+        const scoreX = document.getElementById('score-x');
+        const scoreO = document.getElementById('score-o');
+        const resetButton = document.getElementById('reset');
+        let currentPlayer = 'X';
+        let gameBoard = ['', '', '', '', '', '', '', '', ''];
+        let scores = { X: 0, O: 0 };
+        let gameActive = true;
+
+        // Create board cells
+        for (let i = 0; i < 9; i++)
+        {
+            const cell = document.createElement('div');
+            cell.classList.add('cell');
+            cell.dataset.index = i;
+            cell.addEventListener('click', handleCellClick);
+            board.appendChild(cell);
+        }
+
+        function handleCellClick(e)
+        {
+            const cell = e.target;
+            const index = parseInt(cell.dataset.index);
+
+            if (gameBoard[index] !== '' || !gameActive) return;
+
+            gameBoard[index] = currentPlayer;
+            cell.textContent = currentPlayer;
+            cell.classList.add(currentPlayer.toLowerCase());
+
+            if (checkWin())
             {
-                // Return cached response if found
-                if (response)
-                {
-                    return response;
-                }
+                scores[currentPlayer]++;
+                updateScore();
+                gameActive = false;
+                return;
+            }
 
-                // Clone the request because it can only be used once
-                const fetchRequest = event.request.clone();
+            if (checkDraw())
+            {
+                gameActive = false;
+                return;
+            }
 
-                // Make network request and cache the response
-                return fetch(fetchRequest).then(response =>
-                {
-                    // Check if response is valid
-                    if (!response || response.status !== 200 || response.type !== 'basic')
-                    {
-                        return response;
-                    }
+            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+        }
 
-                    // Clone the response because it can only be used once
-                    const responseToCache = response.clone();
+        function checkWin()
+        {
+            const winPatterns = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+                [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+                [0, 4, 8], [2, 4, 6]             // Diagonals
+            ];
 
-                    caches.open(CACHE_NAME)
-                        .then(cache =>
-                        {
-                            cache.put(event.request, responseToCache);
-                        });
+            return winPatterns.some(pattern =>
+            {
+                const [a, b, c] = pattern;
+                return gameBoard[a] &&
+                    gameBoard[a] === gameBoard[b] &&
+                    gameBoard[a] === gameBoard[c];
+            });
+        }
 
-                    return response;
-                });
-            })
-    );
-}); 
+        function checkDraw()
+        {
+            return gameBoard.every(cell => cell !== '');
+        }
+
+        function updateScore()
+        {
+            scoreX.textContent = scores.X;
+            scoreO.textContent = scores.O;
+        }
+
+        function resetGame()
+        {
+            gameBoard = ['', '', '', '', '', '', '', '', ''];
+            currentPlayer = 'X';
+            gameActive = true;
+            document.querySelectorAll('.cell').forEach(cell =>
+            {
+                cell.textContent = '';
+                cell.classList.remove('x', 'o');
+            });
+        }
+
+        resetButton.addEventListener('click', resetGame);
+    });
+} 
